@@ -5,8 +5,8 @@ const columnsData = [
   {
     title: "Form", description: "Geometrical definition",
     items: [
-      { id: 1, label: "Regular", type: "Symmetric", audio: "/audio/1.wav", img: "https://picsum.photos/600/400?sig=1", info: "Description text here..." },
-      { id: 2, label: "Irregular", type: "Organic", audio: "/audio/2.wav" }
+      { id: 1, label: "Regular", type: "Symmetric", audio: "/audio/regular_1.wav", img: "https://picsum.photos/600/400?sig=1", info: "Description text here..." },
+      { id: 2, label: "Irregular", type: "Organic", audio: "/audio/irregular_1.wav" }
     ]
   },
   {
@@ -19,14 +19,16 @@ const columnsData = [
   {
     title: "Dominance", description: "Visual axis",
     items: [
-      { id: 5, label: "Vertical", type: "Ascending", audio: "/audio/5.wav" },
+      { id: 5, label: "Vertical", type: "Ascending", audio: "/audio/vertical_1.wav" },
+      { id: 15, label: "Vertical", type: "Ascending", audio: "/audio/vertical_2.wav" },
       { id: 6, label: "Horizontal", type: "Extending", audio: "/audio/6.wav" }
     ]
   },
   {
     title: "Structure", description: "Perceived weight",
     items: [
-      { id: 7, label: "Heavy", type: "Massive", audio: "/audio/7.wav" },
+      { id: 7, label: "Heavy", type: "Massive", audio: "/audio/heavy_1.wav" },
+      { id: 21, label: "Heavy", type: "Massive", audio: "/audio/heavy_2.wav" },
       { id: 8, label: "Light", type: "Slender", audio: "/audio/8.wav" }
     ]
   },
@@ -71,7 +73,6 @@ const CloseIcon = () => (
 
 const MusicAnimation = () => (
   <div className="flex gap-0.5 items-end h-3">
-    {/* Fix: Removed the 'jsx' attribute from the style tag */}
     <style>{`
       @keyframes music {
         0%, 100% { height: 4px; }
@@ -162,13 +163,13 @@ const TrackItem = ({ item, onOpenDetails }) => {
       </div>
 
       {/* Header Info */}
-      <div className="mb-6 pr-20">
+      <div className="pr-20">
         <p className="text-[10px] text-neutral-500 uppercase tracking-widest font-medium mb-1">{item.type}</p>
         <h4 className="text-sm font-medium text-neutral-900 truncate">{item.label}</h4>
       </div>
 
-      {/* Controls */}
-      <div className="space-y-4">
+      {/* Controls - Hidden on mobile (md:block) */}
+      <div className="hidden md:block space-y-4 mt-6">
         <Slider label="VOL" value={volume} min="0" max="1" step="0.01" onChange={setVolume} />
         <Slider label="PAN" value={pan} min="-1" max="1" step="0.1" onChange={setPan} isPan />
       </div>
@@ -226,19 +227,41 @@ const Modal = ({ item, onClose }) => {
 export default function ArchitecturalMixer() {
   const [startIndex, setStartIndex] = useState(0);
   const [activeItem, setActiveItem] = useState(null);
-  const visibleCount = 3;
+  const [visibleCount, setVisibleCount] = useState(3);
+
+  // Handle responsive column counts
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setVisibleCount(1);
+      } else if (window.innerWidth < 1024) {
+        setVisibleCount(2);
+      } else {
+        setVisibleCount(3);
+      }
+    };
+
+    // Set initially and listen to resize
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Ensure startIndex stays in bounds when resizing window
+  useEffect(() => {
+    setStartIndex((prev) => Math.min(prev, Math.max(0, columnsData.length - visibleCount)));
+  }, [visibleCount]);
 
   const handleNext = () => setStartIndex((p) => Math.min(p + 1, columnsData.length - visibleCount));
   const handlePrev = () => setStartIndex((p) => Math.max(p - 1, 0));
 
   return (
-    <main className="min-h-screen bg-gray-50 text-neutral-900 px-6 pt-24 pb-12 font-['Poppins',_sans-serif]">
+    <main className="min-h-screen bg-gray-50 text-neutral-900 px-4 md:px-6 pt-16 md:pt-24 pb-12 font-['Poppins',_sans-serif]">
       <Modal item={activeItem} onClose={() => setActiveItem(null)} />
 
       <div className="max-w-7xl mx-auto">
-        <header className="flex justify-between items-end mb-12">
+        <header className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-12">
           <div>
-            {/* ELEGANT BACK LINK ADDED HERE */}
             <a
               href="/"
               className="group inline-flex items-center text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-400 hover:text-neutral-900 transition-colors mb-6"
@@ -255,14 +278,14 @@ export default function ArchitecturalMixer() {
             <button
               onClick={handlePrev}
               disabled={startIndex === 0}
-              className="w-10 h-10 flex items-center justify-center disabled:opacity-30 transition-colors"
+              className="w-10 h-10 flex items-center justify-center disabled:opacity-30 transition-colors bg-white border border-neutral-200 rounded-full hover:bg-neutral-50 sm:border-transparent sm:bg-transparent"
             >
               ←
             </button>
             <button
               onClick={handleNext}
               disabled={startIndex >= columnsData.length - visibleCount}
-              className="w-10 h-10 flex items-center justify-center disabled:opacity-30 transition-colors"
+              className="w-10 h-10 flex items-center justify-center disabled:opacity-30 transition-colors bg-white border border-neutral-200 rounded-full hover:bg-neutral-50 sm:border-transparent sm:bg-transparent"
             >
               →
             </button>
@@ -275,7 +298,7 @@ export default function ArchitecturalMixer() {
             style={{ transform: `translateX(-${startIndex * (100 / visibleCount)}%)` }}
           >
             {columnsData.map((col, idx) => (
-              <div key={idx} className="flex-shrink-0 px-3" style={{ width: `${100 / visibleCount}%` }}>
+              <div key={idx} className="flex-shrink-0 px-2 md:px-3" style={{ width: `${100 / visibleCount}%` }}>
                 <div className="h-full flex flex-col">
                   <div className="mb-6">
                     <h3 className="text-base font-medium text-neutral-900">{col.title}</h3>
