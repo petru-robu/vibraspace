@@ -1,0 +1,268 @@
+[
+  {
+    "title": "Form",
+    "description": "Geometrical definition",
+    "definition": "Architectural form is the organization of mass, space, geometry, and proportion through which a building is physically and perceptually defined.",
+    "img": "/img/categ/FORMA.png",
+    "items": [
+      {
+        "id": 1,
+        "label": "Regular",
+        "type": "Classic pad",
+        "audio": "/audio/1.wav",
+        "arhinfo": "A regular form in architecture is a spatial composition defined by geometric order, symmetry, proportional consistency, and clear organizational logic. It is often based on primary forms or modular systems and conveys balance and legibility.",
+        "musinfo": "This synthesized classic pad produces a highly stable, continuous sonic texture. It evokes a calm, grounded vibe perfect for establishing a solid harmonic foundation.",
+        "img": "/img/1.png"
+      },
+      {
+        "id": 2,
+        "label": "Regular",
+        "type": "Classic pad",
+        "audio": "/audio/2.wav",
+        "arhinfo": "A regular form in architecture is a spatial composition defined by geometric order, symmetry, proportional consistency, and clear organizational logic. It is often based on primary forms or modular systems and conveys balance and legibility.",
+        "musinfo": "Similar to the previous entry, this standard synthesizer pad offers a very steady and reliable tone. It brings a balanced, foundational vibe that sits warmly in the background.",
+        "img": "/img/2.png"
+      },
+      {
+        "id": 3,
+        "label": "Regular",
+        "type": "Simple Hi-Hat Rythm",
+        "audio": "/audio/3.wav",
+        "arhinfo": "A regular form in architecture is a spatial composition defined by geometric order, symmetry, proportional consistency, and clear organizational logic. It is often based on primary forms or modular systems and conveys balance and legibility.",
+        "musinfo": "The hi-hat cymbal provides a straightforward, standard percussive rhythm. It creates a driving, predictable vibe that keeps the tempo cleanly anchored.",
+        "img": "/img/3.png"
+      },
+      {
+        "id": 4,
+        "label": "Irregular",
+        "type": "agressive sky - pad",
+        "audio": "/audio/4.wav",
+        "arhinfo": "An irregular form in architecture is a spatial composition characterized by asymmetry, formal variation, or non-uniform geometry. It often responds to contextual, functional, or expressive intentions and conveys dynamism and complexity.",
+        "musinfo": "This unresting synthesizer pad constantly shifts and moves, creating an aggressive texture. It delivers a turbulent, moody vibe that feels like a stormy sky.",
+        "img": "/img/4.png"
+      },
+      {
+        "id": 5,
+        "label": "Irregular",
+        "type": "Complex Hi-Hat Rythm",
+        "audio": "/audio/5.wav",
+        "arhinfo": "An irregular form in architecture is a spatial composition characterized by asymmetry, formal variation, or non-uniform geometry. It often responds to contextual, functional, or expressive intentions and conveys dynamism and complexity.",
+        "musinfo": "A complex hi-hat pattern provides an intricate, syncopated rhythm. It gives off an energetic, erratic vibe that pushes the track forward unpredictably.",
+        "img": "/img/5.png"
+      }
+    ]
+  },
+  {
+    "title": "Volume",
+    "description": "Mass composition",
+    "definition": "Volume refers specifically to the three-dimensional mass or enclosed spatial extent of a building or one of its parts. It is concerned with measurable spatial presence—height, width, depth, and the amount of space occupied.",
+    "img": "/img/categ/VOLUM.png",
+    "items": [
+      {
+        "id": 6,
+        "label": "Compact",
+        "type": "Electric Piano",
+        "audio": "/audio/6.wav",
+        "arhinfo": "A compact volume in architecture is a concentrated three-dimensional mass characterized by formal unity, continuity, and minimal articulation. It is typically perceived as coherent, dense, and spatially efficient, often emphasizing solidity and clear boundaries.",
+        "musinfo": "The electric piano plays simple, sustained chords with a compact, controlled resonance. It conveys a smooth, focused vibe that feels intimate and classic.",
+        "img": "/img/6.png"
+      },
+      {
+        "id": 7,
+        "label": "Fragmented",
+        "type": "1973 suitcase EP",
+        "audio": "/audio/7.wav",
+        "arhinfo": "A fragmented volume in architecture is a three-dimensional composition composed of separated, intersecting, or articulated masses rather than a single unified form. It is characterized by discontinuity, variation, and spatial complexity, often expressing movement, multiplicity, or layered organization.",
+        "musinfo": "A vintage 1973 suitcase electric piano delivers an unpredictable melody with an unsettling rhythm. It has a jazzy, fractured vibe that keeps the listener on edge.",
+        "img": "/img/7.png"
+      },
+      {
+        "id": 8,
+        "label": "Fragmented",
+        "type": "BD-2 Conga",
+        "audio": "/audio/8.wav",
+        "arhinfo": "A fragmented volume in architecture is a three-dimensional composition composed of separated, intersecting, or articulated masses rather than a single unified form. It is characterized by discontinuity, variation, and spatial complexity, often expressing movement, multiplicity, or layered organization.",
+        "musinfo": "The BD-2 conga drum provides a bouncy and playful percussive element. It brings a lighthearted, fragmented vibe that adds organic groove to the mix.",
+        "img": "/img/8.png"
+      }
+    ]
+  },
+  {
+    "title": "Dominance",
+    "description": "Visual axis",
+    "definition": "Dominance in architecture refers to the visual or spatial prominence of an element, direction, volume, or compositional feature within a building or environment. It is established through scale, proportion, position, contrast, or hierarchy, guiding perception and emphasizing particular spatial relationships.",
+    "img": "/img/categ/DOMINANTA.png",
+    "items": [
+      {
+        "id": 9,
+        "label": "Vertical",
+        "type": "hold and rise up atmosphere",
+        "audio": "/audio/9.wav",
+        "arhinfo": "Vertical dominance in architecture describes a composition in which visual emphasis is placed on height, upward movement, and axial prominence along the vertical axis. It often conveys monumentality, aspiration, hierarchy, and symbolic presence.",
+        "musinfo": "This atmospheric synthesizer effect produces a high, continuous rising sound. It establishes a dominant, uplifting vibe that builds anticipation and vertical tension.",
+        "img": "/img/9.png"
+      },
+      {
+        "id": 10,
+        "label": "Vertical",
+        "type": "Ominous rise",
+        "audio": "/audio/10.wav",
+        "arhinfo": "Vertical dominance in architecture describes a composition in which visual emphasis is placed on height, upward movement, and axial prominence along the vertical axis. It often conveys monumentality, aspiration, hierarchy, and symbolic presence.",
+        "musinfo": "A deep, threatening synthesizer rise creates a dark, ominous atmosphere. It projects a suspenseful vibe that feels like a looming, vertical threat.",
+        "img": "/img/10.png"
+      },
+      {
+        "id": 11,
+        "label": "Horizontal",
+        "type": "above sheer beauty atmosphere",
+        "audio": "/audio/11.wav",
+        "arhinfo": "Horizontal dominance in architecture describes a composition in which visual emphasis is placed on width, extension, and linear continuity along the horizontal axis. It often conveys stability, calmness, grounding, and integration with the landscape.",
+        "musinfo": "A bright, wide synthesizer atmosphere spreads beautifully across the stereo field. It radiates a serene, expansive vibe reminiscent of sheer, horizontal beauty.",
+        "img": "/img/11.png"
+      },
+      {
+        "id": 12,
+        "label": "Horizontal",
+        "type": "Ambient Spectrum",
+        "audio": "/audio/12.wav",
+        "arhinfo": "Horizontal dominance in architecture describes a composition in which visual emphasis is placed on width, extension, and linear continuity along the horizontal axis. It often conveys stability, calmness, grounding, and integration with the landscape.",
+        "musinfo": "This sampled choir acts as a wide, ambient spectrum pad. It produces a lush, horizontal vibe that feels open, airy, and deeply ethereal.",
+        "img": "/img/12.png"
+      }
+    ]
+  },
+  {
+    "title": "Structure",
+    "description": "Perceived weight",
+    "definition": "Structure in architecture refers to the system of load-bearing elements that provides stability, support, and resistance to a building. It organizes the transfer of forces to the ground while shaping spatial order, construction logic, and architectural expression.",
+    "items": [
+      {
+        "id": 13,
+        "label": "Heavy",
+        "type": "beautiful distortion",
+        "audio": "/audio/13.wav",
+        "arhinfo": "A structural system characterized by substantial mass, thick load-bearing elements, and strong material presence. It is commonly associated with solidity, permanence, monumentality, and spatial gravity.",
+        "musinfo": "An electric guitar or heavily processed synth delivers a beautifully rich distortion. It yields a gritty yet structured vibe that feels weighty and powerful.",
+        "img": "/img/13.png"
+      },
+      {
+        "id": 14,
+        "label": "Heavy",
+        "type": "Disonance sfx",
+        "audio": "/audio/14.wav",
+        "arhinfo": "A structural system characterized by substantial mass, thick load-bearing elements, and strong material presence. It is commonly associated with solidity, permanence, monumentality, and spatial gravity.",
+        "musinfo": "These dissonant sound effects create an intense, heavy texture full of friction. They project a highly tense, grating vibe meant to invoke discomfort.",
+        "img": "/img/14.png"
+      },
+      {
+        "id": 15,
+        "label": "Heavy",
+        "type": "Basshat drums",
+        "audio": "/audio/15.wav",
+        "arhinfo": "A structural system characterized by substantial mass, thick load-bearing elements, and strong material presence. It is commonly associated with solidity, permanence, monumentality, and spatial gravity.",
+        "musinfo": "A combination of deep bass and hi-hat drums forms a heavy, driving rhythm section. This drum kit sets an aggressive, structural vibe with massive low-end impact.",
+        "img": "/img/15.png"
+      },
+      {
+        "id": 16,
+        "label": "Light",
+        "type": "Aeveus Aeternu evolving pad",
+        "audio": "/audio/16.wav",
+        "arhinfo": "A structural system characterized by slender elements, reduced mass, and visual permeability. It is commonly associated with efficiency, transparency, precision, and a sense of openness.",
+        "musinfo": "The Aeveus Aeternu evolving pad expands into an open, highly restful synthesizer texture. It floats with a weightless, light vibe that gently shifts over time.",
+        "img": "/img/16.png"
+      },
+      {
+        "id": 17,
+        "label": "Light",
+        "type": "Bright organ",
+        "audio": "/audio/17.wav",
+        "arhinfo": "A structural system characterized by slender elements, reduced mass, and visual permeability. It is commonly associated with efficiency, transparency, precision, and a sense of openness.",
+        "musinfo": "A bright electronic organ provides a very stable, clearly defined tone. It projects a cheerful, light vibe with a crisp and classic resonance.",
+        "img": "/img/17.png"
+      }
+    ]
+  },
+  {
+    "title": "Materiality",
+    "description": "Light interaction",
+    "definition": "Materiality in architecture refers to the physical and sensory qualities of materials as experienced through their texture, weight, color, reflectivity, and construction presence. It influences the perception of space, contributing to atmosphere, meaning, and spatial identity.",
+    "items": [
+      {
+        "id": 18,
+        "label": "Opaque",
+        "type": "Basic Kit drum kit",
+        "audio": "/audio/18.wav",
+        "arhinfo": "Opaque materiality describes materials that block the transmission of light and emphasize mass, enclosure, and solidity. It is often associated with privacy, permanence, and defined spatial boundaries.",
+        "musinfo": "A basic acoustic drum kit produces a dense, opaque percussive sound. It delivers a grounded, solid vibe that firmly anchors the material reality of the track.",
+        "img": "/img/18.png"
+      },
+      {
+        "id": 19,
+        "label": "Translucent",
+        "type": "Air Marimba",
+        "audio": "/audio/19.wav",
+        "arhinfo": "Translucent materiality describes materials that allow light to pass through diffusely without clear visibility beyond the surface. It is often associated with softness, ambiguity, filtered light, and atmospheric depth.",
+        "musinfo": "The air marimba combines a soft bell tone with a spectral, noisy tail. It gives off a translucent, delicate vibe that feels both organic and slightly synthetic.",
+        "img": "/img/19.png"
+      },
+      {
+        "id": 20,
+        "label": "Transparent",
+        "type": "Glass Keys",
+        "audio": "/audio/20.wav",
+        "arhinfo": "Describes materials that allow direct visual and light transmission, maintaining clarity between interior and exterior spaces. It is often associated with openness, lightness, continuity, and visual connection.",
+        "musinfo": "These synthesized glass keys are plucked to create a reverbed, glassy resonance. They offer a highly transparent, fragile vibe that chimes with clear, crystalline purity.",
+        "img": "/img/20.png"
+      }
+    ]
+  },
+  {
+    "title": "Placement",
+    "description": "Site relation",
+    "definition": "Placement in architecture refers to the positional relationship of a building, space, or architectural element within its site or spatial context. It defines how architecture is situated in relation to ground level, surrounding elements, circulation, orientation.",
+    "items": [
+      {
+        "id": 21,
+        "label": "Underground",
+        "type": "Deep dark pad",
+        "audio": "/audio/21.wav",
+        "arhinfo": "Underground placement describes architectural spaces or volumes located partially or entirely below ground level. It is often associated with enclosure, thermal stability, introspection, protection, and a close relationship with the earth.",
+        "musinfo": "A low-frequency, deep dark pad creates a heavily closed-off sonic space. It generates an underground, subterranean vibe that feels heavily insulated and mysterious.",
+        "img": "/img/21.png"
+      },
+      {
+        "id": 22,
+        "label": "Aboveground",
+        "type": "Cool Voices",
+        "audio": "/audio/22.wav",
+        "arhinfo": "Aboveground placement describes architectural spaces or volumes located at or above natural ground level. It is often associated with visibility, openness, accessibility, exposure to light, and spatial presence within the surrounding context.",
+        "musinfo": "A synthesized choir of cool voices produces a bright and airy vocal texture. It floats with an aboveground, ethereal vibe that feels open and celestial.",
+        "img": "/img/22.png"
+      }
+    ]
+  },
+  {
+    "title": "Repetition",
+    "description": "Spatial intervals",
+    "definition": "Repetition in architecture refers to the recurring use of forms, elements, modules, or spatial intervals within a composition. It establishes order, rhythm, continuity, and visual coherence, often rearhinforcing structure and hierarchy.",
+    "items": [
+      {
+        "id": 23,
+        "label": "Dense",
+        "type": "Rhythmic Cluster",
+        "audio": "/audio/23.wav",
+        "arhinfo": "Dense repetition describes a pattern in which architectural elements are repeated at close intervals with limited spacing. It is often associated with intensity, texture, enclosure, and a strong rhythmic presence.",
+        "img": "/img/23.png"
+      },
+      {
+        "id": 24,
+        "label": "Sparse",
+        "type": "Open Interval",
+        "audio": "/audio/24.wav",
+        "arhinfo": "Sparse repetition describes a pattern in which architectural elements are repeated at wider intervals with greater spacing between them. It is often associated with openness, lightness, clarity, and a more relaxed spatial rhythm.",
+        "img": "/img/24.png"
+      }
+    ]
+  }
+]

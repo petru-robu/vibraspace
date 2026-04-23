@@ -20,8 +20,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-4 items-start">
             <div className="md:col-span-8">
               <h1 className="text-5xl md:text-8xl font-light tracking-tighter leading-[1.05]">
-                Sound & <br />
-                <span className="text-neutral-500 italic">Structure.</span>
+                Composing<br />
+                <span className="text-neutral-500 italic">Atmospheres</span>
               </h1>
             </div>
             
@@ -29,10 +29,10 @@ export default function Home() {
               <div className="h-px w-12 bg-neutral-700 hidden md:block" />
               <div>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-500 font-semibold mb-3">
-                  Interactive Workshop
+                  An experimental architecture workshop
                 </p>
                 <p className="text-sm text-neutral-400 leading-relaxed font-light">
-                  Explore the intersection of architectural geometry and musical composition. Discover how spatial elements like volume, materiality, and form translate directly into sonic landscapes.
+                  An architectural experiment that seeks to explore the relationship between music and architecture, and the many ways in which these two disciplines can intersect, inform one another, and generate new forms of understanding.
                 </p>
               </div>
             </div>

@@ -1,53 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-
-// --- 1. DATA ---
-const columnsData = [
-  {
-    title: "Form", description: "Geometrical definition",
-    items: [
-      { id: 1, label: "Regular", type: "Symmetric", audio: "/audio/regular_1.wav", img: "https://picsum.photos/600/400?sig=1", info: "Description text here..." },
-      { id: 2, label: "Irregular", type: "Organic", audio: "/audio/irregular_1.wav" }
-    ]
-  },
-  {
-    title: "Volume", description: "Mass composition",
-    items: [
-      { id: 3, label: "Compact", type: "Solid", audio: "/audio/3.wav" },
-      { id: 4, label: "Fragmented", type: "Articulated", audio: "/audio/4.wav" }
-    ]
-  },
-  {
-    title: "Dominance", description: "Visual axis",
-    items: [
-      { id: 5, label: "Vertical", type: "Ascending", audio: "/audio/vertical_1.wav" },
-      { id: 15, label: "Vertical", type: "Ascending", audio: "/audio/vertical_2.wav" },
-      { id: 6, label: "Horizontal", type: "Extending", audio: "/audio/6.wav" }
-    ]
-  },
-  {
-    title: "Structure", description: "Perceived weight",
-    items: [
-      { id: 7, label: "Heavy", type: "Massive", audio: "/audio/heavy_1.wav" },
-      { id: 21, label: "Heavy", type: "Massive", audio: "/audio/heavy_2.wav" },
-      { id: 8, label: "Light", type: "Slender", audio: "/audio/8.wav" }
-    ]
-  },
-  {
-    title: "Materiality", description: "Light interaction",
-    items: [
-      { id: 9, label: "Opaque", type: "Solid", audio: "/audio/9.wav" },
-      { id: 10, label: "Translucent", type: "Semi-Clear", audio: "/audio/10.wav" },
-      { id: 11, label: "Transparent", type: "Clear", audio: "/audio/11.wav" }
-    ]
-  },
-  {
-    title: "Placement", description: "Site relation",
-    items: [
-      { id: 12, label: "Underground", type: "Subterranean", audio: "/audio/12.wav" },
-      { id: 13, label: "Above-ground", type: "Suprateran", audio: "/audio/13.wav" }
-    ]
-  }
-];
+import columnsData from "./columns_data.json";
 
 // --- 2. ICONS & ANIMATIONS ---
 const PlayIcon = () => (
@@ -114,6 +66,7 @@ const Slider = ({ label, value, onChange, min, max, step, isPan }) => (
 
 // --- 4. FEATURE COMPONENTS ---
 const TrackItem = ({ item, onOpenDetails }) => {
+  // TrackItem = only a single card; contains sliders, play button, info that opens modal
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.7);
   const [pan, setPan] = useState(0);
@@ -180,6 +133,7 @@ const TrackItem = ({ item, onOpenDetails }) => {
 };
 
 const Modal = ({ item, onClose }) => {
+  // Modal is the pop-up that opens when clicking info
   if (!item) return null;
   return (
     <div
@@ -201,14 +155,18 @@ const Modal = ({ item, onClose }) => {
             </button>
           </div>
 
+          <p className="text-sm text-neutral-600 leading-relaxed mb-6 text-justify">
+            {item.musinfo}
+          </p>
+
           {item.img && (
-            <div className="mb-6 rounded-xl overflow-hidden bg-neutral-100">
-              <img src={item.img} alt={item.label} className="w-full h-48 object-cover" />
+            <div className="mb-6 rounded-xl overflow-hidden bg-white flex items-center justify-center">
+              <img src={item.img} alt={item.label} className="w-full h-48 object-contain" />
             </div>
           )}
 
-          <p className="text-sm text-neutral-600 leading-relaxed mb-6">
-            {item.info || "Architectural characteristics and spatial implications of the selected element within the matrix."}
+          <p className="text-sm text-neutral-600 leading-relaxed mb-6 text-justify">
+            {item.arhinfo || "Architectural characteristics and spatial implications of the selected element within the matrix."}
           </p>
 
           <button
@@ -261,6 +219,8 @@ export default function ArchitecturalMixer() {
 
       <div className="max-w-7xl mx-auto">
         <header className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-12">
+
+          {/* Return home arrow, title and subtitle */}
           <div>
             <a
               href="/"
@@ -274,6 +234,7 @@ export default function ArchitecturalMixer() {
             <p className="text-sm text-neutral-500 mt-2">Mix and analyze spatial characteristics.</p>
           </div>
 
+          {/* Next / Previous arrows */}
           <div className="flex gap-2">
             <button
               onClick={handlePrev}
@@ -291,7 +252,7 @@ export default function ArchitecturalMixer() {
             </button>
           </div>
         </header>
-
+        
         <div className="overflow-hidden">
           <div
             className="flex transition-transform duration-500 ease-in-out"
@@ -300,10 +261,29 @@ export default function ArchitecturalMixer() {
             {columnsData.map((col, idx) => (
               <div key={idx} className="flex-shrink-0 px-2 md:px-3" style={{ width: `${100 / visibleCount}%` }}>
                 <div className="h-full flex flex-col">
+
+                  {/* UPDATE: Added flex container and info button mapped to modal format here */}
                   <div className="mb-6">
-                    <h3 className="text-base font-medium text-neutral-900">{col.title}</h3>
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-base font-medium text-neutral-900">{col.title}</h3>
+                      {/* info button for main category */}
+                      <button
+                        onClick={() => setActiveItem({
+                          type: "Category",
+                          label: col.title,
+                          arhinfo: col.definition,
+                          img: col.img
+                        })}
+                        className="p-1 text-neutral-400 hover:text-neutral-900 transition-colors rounded-full hover:bg-neutral-200"
+                        title="Category Info"
+                      >
+                        <InfoIcon />
+                      </button>
+                    </div>
                     <p className="text-xs text-neutral-500 mt-1">{col.description}</p>
                   </div>
+
+                  {/* The track items */}
                   <div className="space-y-4">
                     {col.items.map((item) => (
                       <TrackItem key={item.id} item={item} onOpenDetails={setActiveItem} />
