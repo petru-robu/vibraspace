@@ -23,18 +23,13 @@ The Vite dev server proxies `/api` → `http://localhost:3001` automatically.
 
 ## Production Deployment
 
-### On your local machine — build first
-
-```bash
-npm run build          # outputs to dist/
-git add dist/ && git commit -m "build" && git push
-```
-
 ### On the VPS — first-time setup
 
 ```bash
 git clone https://github.com/your-user/vibraspace.git
-cd vibraspace/backend && npm install
+cd vibraspace
+npm install && npm run build
+cd backend && npm install
 npm install -g pm2
 pm2 start server.js --name vibraspace
 pm2 save
@@ -46,6 +41,7 @@ pm2 startup            # follow the printed command to enable on boot
 ```bash
 cd vibraspace
 git pull
+npm install && npm run build
 cd backend && npm install
 pm2 restart vibraspace
 ```
@@ -55,9 +51,51 @@ pm2 restart vibraspace
 | Variable | Default | Description |
 |---|---|---|
 | `PORT` | `3001` | Port the server listens on |
-| `FRONTEND_URL` | `http://localhost:5173` | Allowed CORS origin |
+| `FRONTEND_URL` | `https://composingatmospheres.ro` | Allowed CORS origin |
 
-Set them in a `.env` file or inline: `PORT=3001 FRONTEND_URL=https://yourdomain.com node server.js`
+Set them before starting PM2:
+```bash
+export PORT=3001
+export FRONTEND_URL=https://composingatmospheres.ro/
+pm2 restart vibraspace
+```
+
+---
+
+## Caddy (HTTPS reverse proxy)
+
+Caddy sits in front of Express and handles HTTPS automatically via Let's Encrypt.
+
+### Install Caddy on the VPS
+
+```bash
+sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+sudo apt update && sudo apt install caddy
+```
+
+### Caddyfile
+
+Create `/etc/caddy/Caddyfile`:
+
+```
+composingatmospheres.ro {
+    reverse_proxy localhost:3001
+}
+```
+
+Your DNS A record must point to the VPS IP.
+
+### Start Caddy
+
+```bash
+sudo systemctl reload caddy   # apply Caddyfile changes
+sudo systemctl enable caddy   # start on boot
+sudo systemctl status caddy   # check it's running
+```
+
+Caddy automatically obtains and renews the TLS certificate. Your app will be live at `https://composingatmospheres.ro`.
 
 ---
 
