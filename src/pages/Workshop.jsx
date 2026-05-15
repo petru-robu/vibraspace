@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import projects from "./projects_data";
 
 const ArrowLeft = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1.5">
@@ -90,6 +92,45 @@ export default function Workshop() {
             <p className="text-sm text-neutral-400 leading-relaxed font-light text-justify md:text-center">
               By listening to these projects, participants are invited to perceive them differently—to understand architecture not only through drawings and images, but through emotion, rhythm, and sensory resonance. In this sense, the workshop creates a dialogue between student design, sound, and perception, revealing how architecture can be felt before it is built.
             </p>
+          </div>
+        </section>
+
+        {/* PART 4: PROJECT GALLERY */}
+        <section className="py-24 border-b border-neutral-800">
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-500 block mb-3">
+                The Projects
+              </span>
+              <h2 className="text-3xl md:text-4xl font-light tracking-tight">Student Work</h2>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-neutral-800 border border-neutral-800">
+            {projects.map(project => (
+              <Link
+                key={project.id}
+                to={`/workshop/${project.id}`}
+                className="group bg-neutral-950 hover:bg-neutral-900 transition-colors overflow-hidden flex flex-col"
+              >
+                <div className="aspect-[4/3] overflow-hidden bg-neutral-900">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
+                  />
+                </div>
+                <div className="p-6 flex flex-col gap-1 flex-1">
+                  <span className="text-[9px] font-semibold tracking-[0.2em] uppercase text-neutral-600">
+                    {String(project.id).padStart(2, "0")}
+                  </span>
+                  <p className="text-sm font-medium text-neutral-200 group-hover:text-white transition-colors">
+                    {project.title}
+                  </p>
+                  <p className="text-xs text-neutral-600">{project.student}</p>
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
 

@@ -7,6 +7,9 @@ import Contact from "./pages/Contact";
 import Mixer from "./pages/Mixer";
 import Theory from "./pages/Theory";
 import Workshop from "./pages/Workshop";
+import WorkshopProject from "./pages/WorkshopProject";
+import SessionForm from "./pages/SessionForm";
+import CustomMixer from "./pages/CustomMixer";
 
 import { Link } from "react-router-dom";
 
@@ -21,6 +24,9 @@ function App() {
         <Route path="/mixer" element={<Mixer />} />
         <Route path="/theory" element={<Theory />} />
         <Route path="/workshop" element={<Workshop />} />
+        <Route path="/workshop/:id" element={<WorkshopProject />} />
+        <Route path="/session-form" element={<SessionForm />} />
+        <Route path="/session-mixer" element={<CustomMixer />} />
       </Routes>
     </BrowserRouter>
   );

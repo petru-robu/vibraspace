@@ -1,11 +1,117 @@
-# React + Vite
+# Vibraspace
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite frontend · Express + SQLite backend.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Local Development
+
+```bash
+# Frontend (http://localhost:5173)
+npm install
+npm run dev
+
+# Backend (http://localhost:3001) — separate terminal
+cd backend
+npm install
+npm run dev
+```
+
+The Vite dev server proxies `/api` → `http://localhost:3001` automatically.
+
+---
+
+## Production Deployment
+
+### On your local machine — build first
+
+```bash
+npm run build          # outputs to dist/
+git add dist/ && git commit -m "build" && git push
+```
+
+### On the VPS — first-time setup
+
+```bash
+git clone https://github.com/your-user/vibraspace.git
+cd vibraspace/backend && npm install
+npm install -g pm2
+pm2 start server.js --name vibraspace
+pm2 save
+pm2 startup            # follow the printed command to enable on boot
+```
+
+### On the VPS — every deploy after that
+
+```bash
+cd vibraspace
+git pull
+cd backend && npm install
+pm2 restart vibraspace
+```
+
+### Environment variables
+
+| Variable | Default | Description |
+|---|---|---|
+| `PORT` | `3001` | Port the server listens on |
+| `FRONTEND_URL` | `http://localhost:5173` | Allowed CORS origin |
+
+Set them in a `.env` file or inline: `PORT=3001 FRONTEND_URL=https://yourdomain.com node server.js`
+
+---
+
+## Database
+
+SQLite file: `backend/sessions.db`
+
+### Open the database
+
+```bash
+sqlite3 backend/sessions.db
+```
+
+### Useful queries
+
+```sql
+-- All sessions (summary)
+SELECT id, project_name, description, created_at FROM sessions ORDER BY created_at DESC;
+
+-- Count sessions
+SELECT COUNT(*) FROM sessions;
+
+-- Full details of a session (replace 1 with the id)
+SELECT * FROM sessions WHERE id = 1;
+
+-- Sessions with audio
+SELECT id, project_name, audio_file, created_at FROM sessions WHERE audio_file IS NOT NULL;
+
+-- Sessions without audio
+SELECT id, project_name, created_at FROM sessions WHERE audio_file IS NULL;
+
+-- Sessions for a specific project (replace 'MyProject' with the name)
+SELECT id, project_name, description, created_at FROM sessions WHERE project_name = 'MyProject';
+
+-- Recent 10 sessions
+SELECT id, project_name, created_at FROM sessions ORDER BY created_at DESC LIMIT 10;
+
+-- Delete a session by id
+DELETE FROM sessions WHERE id = 1;
+
+-- Show table schema
+.schema sessions
+```
+
+### Handy sqlite3 CLI commands
+
+```
+.tables          -- list all tables
+.headers on      -- show column names
+.mode column     -- aligned output
+.quit            -- exit
+```
+
+---
 
 ## React Compiler
 

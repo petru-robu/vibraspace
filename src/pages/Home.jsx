@@ -61,7 +61,7 @@ export default function Home() {
                   <a
                     className="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-500 hover:text-neutral-50 transition-colors duration-300"
                   >
-                    Phone: +40742082296
+                    +40742082296
                   </a>
                 </div>
               </div>
@@ -147,6 +147,31 @@ export default function Home() {
               className="group flex items-center text-sm font-medium border-b border-neutral-600 pb-1.5 hover:text-neutral-50 hover:border-neutral-50 transition-all text-neutral-400"
             >
               View Workshop Details <ArrowRight />
+            </a>
+          </div>
+        </section>
+
+        {/* 04. STUDIO */}
+        <section className="py-24 flex flex-col md:flex-row justify-between items-start gap-12 border-b border-neutral-800">
+          <div className="max-w-xl">
+            <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-500 block mb-6">
+              04 / Studio Session
+            </span>
+            <h2 className="text-3xl md:text-5xl font-light tracking-tight leading-tight">
+              Compose your <br />
+              <span className="font-medium">Soundscape.</span>
+            </h2>
+          </div>
+
+          <div className="max-w-sm flex flex-col items-start">
+            <p className="text-sm text-neutral-400 leading-relaxed font-light mb-8 text-justify">
+              Define your architectural parameters — form, volume, structure, materiality — and let the system generate a curated sonic environment tailored to your spatial composition. Record and save your session.
+            </p>
+            <a
+              href="/session-form"
+              className="group flex items-center text-sm font-medium border-b border-neutral-600 pb-1.5 hover:text-neutral-50 hover:border-neutral-50 transition-all text-neutral-400"
+            >
+              Start a Session <ArrowRight />
             </a>
           </div>
         </section>
