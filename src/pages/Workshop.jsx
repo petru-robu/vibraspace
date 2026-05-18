@@ -1,13 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import projects from "./projects_data";
-
-const ArrowLeft = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1.5">
-    <line x1="19" y1="12" x2="5" y2="12" />
-    <polyline points="12 19 5 12 12 5" />
-  </svg>
-);
+import projects from "../data/projects_data";
+import BackLink from "../components/layout/BackLink";
+import Footer from "../components/layout/Footer";
+import { routes } from "../routes";
 
 export default function Workshop() {
   return (
@@ -15,12 +11,7 @@ export default function Workshop() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-12">
         
         {/* BACK NAVIGATION */}
-        <a 
-          href="/" 
-          className="inline-flex items-center text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-500 hover:text-neutral-50 transition-colors mb-16 group"
-        >
-          <ArrowLeft /> Back to Home
-        </a>
+        <BackLink to={routes.home}>Back to Home</BackLink>
 
         {/* HEADER SECTION */}
         <section className="pb-24 border-b border-neutral-800">
@@ -135,9 +126,7 @@ export default function Workshop() {
         </section>
 
         {/* MINIMAL FOOTER */}
-        <footer className="py-10 flex justify-center md:justify-start text-[10px] font-semibold tracking-widest uppercase text-neutral-600">
-          <p>© Composing Atmospheres: An experimental architecture workshop</p>
-        </footer>
+        <Footer />
 
       </div>
     </main>

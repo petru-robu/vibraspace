@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import columnsData from "./columns_data.json";
+import { Link, useNavigate } from "react-router-dom";
+import columnsData from "../data/columns_data.json";
 import Navbar from "../components/Navbar";
+import { routes } from "../routes";
 
 const ArrowLeft = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-3.5 h-3.5 mr-2 transition-transform duration-300 group-hover:-translate-x-1">
@@ -24,7 +25,7 @@ export default function SessionForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/session-mixer", {
+    navigate(routes.sessionMixer, {
       state: { projectName: projectName.trim(), projectDescription: projectDescription.trim(), selections },
     });
   };
@@ -33,13 +34,13 @@ export default function SessionForm() {
     <div className="min-h-screen bg-gray-50 text-neutral-900 px-4 md:px-6 pt-16 md:pt-24 pb-16 font-['Poppins',_sans-serif]">
       <Navbar />
       <div className="max-w-2xl mx-auto">
-        <a
-          href="/"
+        <Link
+          to={routes.home}
           className="group inline-flex items-center text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-400 hover:text-neutral-900 transition-colors mb-6"
         >
           <ArrowLeft />
           Return Home
-        </a>
+        </Link>
 
         <h1 className="text-3xl font-medium tracking-tight text-neutral-900 mb-2">
           New Session

@@ -1,18 +1,12 @@
 import React from "react";
-// import Navbar from "../components/Navbar"; 
-
-const ArrowRight = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1.5">
-    <line x1="5" y1="12" x2="19" y2="12" />
-    <polyline points="12 5 19 12 12 19" />
-  </svg>
-);
+import { Link } from "react-router-dom";
+import { ArrowRight } from "../components/icons/Arrows";
+import Footer from "../components/layout/Footer";
+import { routes } from "../routes";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-neutral-950 text-neutral-50 font-['Poppins',_sans-serif] selection:bg-neutral-100 selection:text-neutral-900">
-      {/* <Navbar /> */}
-
       {/* HERO SECTION */}
       <section className="relative pt-32 pb-24 border-b border-neutral-800 bg-[url('/img/cover.webp')] bg-cover bg-center bg-no-repeat">
 
@@ -90,12 +84,12 @@ export default function Home() {
               Explore the fundamental principles mapping architectural forms to acoustic properties. Dive deep into how form, volume, and physical materiality dictate the resonance and timbre of space.
             </p>
             {/* Link to Theory */}
-            <a
-              href="/theory"
+            <Link
+              to={routes.theory}
               className="group flex items-center text-sm font-medium border-b border-neutral-600 pb-1.5 hover:text-neutral-50 hover:border-neutral-50 transition-all text-neutral-400"
             >
               Read the Theory <ArrowRight />
-            </a>
+            </Link>
           </div>
         </section>
 
@@ -116,12 +110,12 @@ export default function Home() {
               A bespoke interactive interface designed to isolate specific building characteristics and manipulate their resulting audio parameters in real-time. Test the theories yourself.
             </p>
             {/* Link to Mixer */}
-            <a
-              href="/mixer"
+            <Link
+              to={routes.mixer}
               className="group flex items-center text-sm font-medium border-b border-neutral-600 pb-1.5 hover:text-neutral-50 hover:border-neutral-50 transition-all text-neutral-400"
             >
               Launch the Mixer <ArrowRight />
-            </a>
+            </Link>
           </div>
         </section>
 
@@ -142,12 +136,12 @@ export default function Home() {
               Join our upcoming session to translate architectural theory into sonic reality. We will explore site placement, structural dominance, and audio mapping in a focused, immersive environment.
             </p>
             {/* Link to Workshop */}
-            <a
-              href="/workshop"
+            <Link
+              to={routes.workshop}
               className="group flex items-center text-sm font-medium border-b border-neutral-600 pb-1.5 hover:text-neutral-50 hover:border-neutral-50 transition-all text-neutral-400"
             >
               View Workshop Details <ArrowRight />
-            </a>
+            </Link>
           </div>
         </section>
 
@@ -167,19 +161,17 @@ export default function Home() {
             <p className="text-sm text-neutral-400 leading-relaxed font-light mb-8 text-justify">
               Define your architectural parameters — form, volume, structure, materiality — and let the system generate a curated sonic environment tailored to your spatial composition. Record and save your session.
             </p>
-            <a
-              href="/session-form"
+            <Link
+              to={routes.sessionForm}
               className="group flex items-center text-sm font-medium border-b border-neutral-600 pb-1.5 hover:text-neutral-50 hover:border-neutral-50 transition-all text-neutral-400"
             >
               Start a Session <ArrowRight />
-            </a>
+            </Link>
           </div>
         </section>
 
         {/* MINIMAL FOOTER */}
-        <footer className="py-10 flex justify-center md:justify-start text-[10px] font-semibold tracking-widest uppercase text-neutral-600">
-          <p>© Composing Atmospheres: An experimental architecture workshop</p>
-        </footer>
+        <Footer />
 
       </div>
     </main>

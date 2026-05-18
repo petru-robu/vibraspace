@@ -1,27 +1,10 @@
 import React, { useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import projects from "./projects_data";
+import projects from "../data/projects_data";
 import Navbar from "../components/Navbar";
-
-const ArrowLeft = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1">
-    <line x1="19" y1="12" x2="5" y2="12" />
-    <polyline points="12 19 5 12 12 5" />
-  </svg>
-);
-
-const PlayIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-    <polygon points="5,3 19,12 5,21" />
-  </svg>
-);
-
-const PauseIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-    <rect x="6" y="4" width="4" height="16" rx="1" />
-    <rect x="14" y="4" width="4" height="16" rx="1" />
-  </svg>
-);
+import { PauseIcon, PlayIcon } from "../components/icons/AudioIcons";
+import { ArrowLeft } from "../components/icons/Arrows";
+import { routes } from "../routes";
 
 export default function WorkshopProject() {
   const { id } = useParams();
@@ -36,7 +19,7 @@ export default function WorkshopProject() {
     return (
       <main className="min-h-screen bg-neutral-950 text-neutral-50 flex flex-col items-center justify-center font-['Poppins',_sans-serif]">
         <p className="text-neutral-500 mb-6">Project not found.</p>
-        <Link to="/workshop" className="text-sm text-neutral-300 underline">Back to Workshop</Link>
+        <Link to={routes.workshop} className="text-sm text-neutral-300 underline">Back to Workshop</Link>
       </main>
     );
   }
@@ -82,7 +65,7 @@ export default function WorkshopProject() {
 
         {/* Back */}
         <Link
-          to="/workshop"
+          to={routes.workshop}
           className="group inline-flex items-center text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-500 hover:text-neutral-50 transition-colors mb-12"
         >
           <ArrowLeft /> Back to Workshop

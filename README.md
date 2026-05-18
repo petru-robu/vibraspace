@@ -1,160 +1,178 @@
 # Vibraspace
 
-React + Vite frontend · Express + SQLite backend.
+Vibraspace is a React app for the **Composing Atmospheres** architecture workshop.
 
----
+The app explains the theory behind the workshop, shows student projects, and lets visitors translate architectural choices into layered sound.
+
+## What The App Contains
+
+- **Home**: introduction and links to the main areas.
+- **Theory**: written framework for the relationship between architecture, perception, and sound.
+- **Workshop**: description of Studio 46 and a gallery of student projects.
+- **Workshop Project**: one project page with image, description, and audio playback.
+- **Mixer**: a free audio matrix where anyone can play and combine architectural sound tracks.
+- **Session Form**: asks for a project name, description, and architectural parameters.
+- **Session Mixer**: creates a curated mixer from the form choices, records 45 seconds, and saves the result.
+
+## Mixer vs Session Mixer
+
+### Mixer
+
+Route: `/mixer`
+
+The regular Mixer is an open playground. It loads all categories from `src/data/columns_data.json` and shows them in a carousel-style grid.
+
+Each track can be:
+
+- played or paused
+- adjusted by volume
+- adjusted by stereo pan
+- opened for more architectural and musical information
+
+This mixer does not save anything. It is mainly for exploration.
+
+### Session Mixer
+
+Route: `/session-mixer`
+
+The Session Mixer is used after the user fills in `/session-form`.
+
+The form sends:
+
+- project name
+- optional project description
+- one selected value for each architectural category
+
+By default, the Session Mixer only shows tracks that match those selections. The user can switch between:
+
+- **Curated**: only the selected architectural tracks
+- **All tracks**: the full mixer data
+
+When the user submits, the app records 45 seconds of the current mix. It sends the project data, track state, and audio file to the backend.
+
+Saved sessions are stored in SQLite, and audio files are stored in `backend/uploads`.
+
+## Project Structure
+
+```text
+src/
+  components/
+    layout/      shared page layout pieces
+    mixer/       mixer UI pieces such as tracks, sliders, and modals
+    session/     session recording overlay and action bar
+  data/          mixer and workshop data
+  hooks/         reusable audio and recording logic
+  pages/         route-level screens
+  routes.js      shared route and nav definitions
+
+backend/
+  lib/           config, database, uploads, session repository
+  routes/        Express route handlers
+  server.js      app setup and startup
+```
 
 ## Local Development
 
-```bash
-# Frontend (http://localhost:5173)
-npm install
-npm run dev
+Install frontend dependencies:
 
-# Backend (http://localhost:3001) — separate terminal
+```bash
+npm install
+```
+
+Install backend dependencies:
+
+```bash
 cd backend
 npm install
+```
+
+Run the frontend:
+
+```bash
 npm run dev
 ```
 
-The Vite dev server proxies `/api` → `http://localhost:3001` automatically.
-
----
-
-## Production Deployment
-
-### On the VPS — first-time setup
+Run the backend in another terminal:
 
 ```bash
-git clone https://github.com/your-user/vibraspace.git
-cd vibraspace
-npm install && npm run build
-cd backend && npm install
-npm install -g pm2
-pm2 start server.js --name vibraspace
-pm2 save
-pm2 startup            # follow the printed command to enable on boot
+cd backend
+npm run dev
 ```
 
-### On the VPS — every deploy after that
+Frontend: `http://localhost:5173`
 
-```bash
-cd vibraspace
-git pull
-npm install && npm run build
-cd backend && npm install
-pm2 restart vibraspace
-```
+Backend: `http://localhost:3001`
 
-### Environment variables
+The Vite dev server proxies `/api` to `http://localhost:3001`.
 
-| Variable | Default | Description |
-|---|---|---|
-| `PORT` | `3001` | Port the server listens on |
-| `FRONTEND_URL` | `https://composingatmospheres.ro` | Allowed CORS origin |
+## Backend API
 
-Set them before starting PM2:
-```bash
-export PORT=3001
-export FRONTEND_URL=https://composingatmospheres.ro/
-pm2 restart vibraspace
-```
+### `POST /api/sessions`
 
----
+Saves a new recorded session.
 
-## Caddy (HTTPS reverse proxy)
+Expected multipart fields:
 
-Caddy sits in front of Express and handles HTTPS automatically via Let's Encrypt.
+- `projectName`
+- `projectDescription`
+- `formData`
+- `trackStates`
+- `audio`
 
-### Install Caddy on the VPS
+### `GET /api/sessions`
 
-```bash
-sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
-curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
-curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
-sudo apt update && sudo apt install caddy
-```
+Lists saved sessions without full track state.
 
-### Caddyfile
+### `GET /api/sessions/:id`
 
-Create `/etc/caddy/Caddyfile`:
+Returns one saved session with full track state.
 
-```
-composingatmospheres.ro {
-    reverse_proxy localhost:3001
-}
-```
+### `GET /api/sessions/:id/audio`
 
-Your DNS A record must point to the VPS IP.
-
-### Start Caddy
-
-```bash
-sudo systemctl reload caddy   # apply Caddyfile changes
-sudo systemctl enable caddy   # start on boot
-sudo systemctl status caddy   # check it's running
-```
-
-Caddy automatically obtains and renews the TLS certificate. Your app will be live at `https://composingatmospheres.ro`.
-
----
+Streams the saved audio file for a session.
 
 ## Database
 
-SQLite file: `backend/sessions.db`
+SQLite file:
 
-### Open the database
-
-```bash
+```text
 sqlite3 backend/sessions.db
 ```
 
-### Useful queries
+Useful query:
 
 ```sql
--- All sessions (summary)
-SELECT id, project_name, description, created_at FROM sessions ORDER BY created_at DESC;
-
--- Count sessions
-SELECT COUNT(*) FROM sessions;
-
--- Full details of a session (replace 1 with the id)
-SELECT * FROM sessions WHERE id = 1;
-
--- Sessions with audio
-SELECT id, project_name, audio_file, created_at FROM sessions WHERE audio_file IS NOT NULL;
-
--- Sessions without audio
-SELECT id, project_name, created_at FROM sessions WHERE audio_file IS NULL;
-
--- Sessions for a specific project (replace 'MyProject' with the name)
-SELECT id, project_name, description, created_at FROM sessions WHERE project_name = 'MyProject';
-
--- Recent 10 sessions
-SELECT id, project_name, created_at FROM sessions ORDER BY created_at DESC LIMIT 10;
-
--- Delete a session by id
-DELETE FROM sessions WHERE id = 1;
-
--- Show table schema
-.schema sessions
+SELECT id, project_name, description, audio_file, created_at
+FROM sessions
+ORDER BY created_at DESC;
 ```
 
-### Handy sqlite3 CLI commands
+## Checks
 
+```bash
+npm run lint
+npm run build
+node --check backend/server.js
 ```
-.tables          -- list all tables
-.headers on      -- show column names
-.mode column     -- aligned output
-.quit            -- exit
+
+## Production Notes
+
+Build the frontend:
+
+```bash
+npm run build
 ```
 
----
+Start the backend:
 
-## React Compiler
+```bash
+cd backend
+npm start
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Environment variables:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Variable | Default | Description |
+|---|---|---|
+| `PORT` | `3001` | Backend port |
+| `FRONTEND_URL` | `http://localhost:5173` | Allowed CORS origin |

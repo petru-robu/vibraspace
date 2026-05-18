@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { navLinks } from "../routes";
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
-
-    const navLinks = ["Home", "About", "Mixer", "Studio", "Contact"];
 
     return (
         <>
@@ -40,12 +39,12 @@ export default function Navbar() {
                 <nav className="flex flex-col gap-8 px-10 pt-10">
                     {navLinks.map((link) => (
                         <Link
-                            key={link}
-                            to={link === "Studio" ? "/session-form" : `/${link.toLowerCase()}`}
+                            key={link.to}
+                            to={link.to}
                             className="group text-3xl font-light text-white hover:text-indigo-600 transition-colors"
                             onClick={() => setOpen(false)}
                         >
-                            {link}
+                            {link.label}
                         </Link>
                     ))}
                 </nav>

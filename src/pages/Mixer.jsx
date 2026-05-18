@@ -1,7 +1,8 @@
 import React from "react";
-import columnsData from "./columns_data.json";
+import columnsData from "../data/columns_data.json";
 import MixerGrid, { ArrowLeft } from "../components/MixerGrid";
 import Navbar from "../components/Navbar";
+import { routes } from "../routes";
 
 export default function ArchitecturalMixer() {
   return (
@@ -14,7 +15,7 @@ export default function ArchitecturalMixer() {
             <header className="flex flex-col sm:flex-row justify-between sm:items-end gap-6 mb-12">
               <div>
                 <a
-                  href="/"
+                  href={routes.home}
                   className="group inline-flex items-center text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-400 hover:text-neutral-900 transition-colors mb-6"
                 >
                   <ArrowLeft />
