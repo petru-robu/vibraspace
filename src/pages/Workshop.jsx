@@ -1,11 +1,9 @@
 import React from "react";
-
-const ArrowLeft = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1.5">
-    <line x1="19" y1="12" x2="5" y2="12" />
-    <polyline points="12 19 5 12 12 5" />
-  </svg>
-);
+import { Link } from "react-router-dom";
+import projects from "../data/projects_data";
+import BackLink from "../components/layout/BackLink";
+import Footer from "../components/layout/Footer";
+import { routes } from "../routes";
 
 export default function Workshop() {
   return (
@@ -13,12 +11,7 @@ export default function Workshop() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-12">
         
         {/* BACK NAVIGATION */}
-        <a 
-          href="/" 
-          className="inline-flex items-center text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-500 hover:text-neutral-50 transition-colors mb-16 group"
-        >
-          <ArrowLeft /> Back to Home
-        </a>
+        <BackLink to={routes.home}>Back to Home</BackLink>
 
         {/* HEADER SECTION */}
         <section className="pb-24 border-b border-neutral-800">
@@ -93,10 +86,47 @@ export default function Workshop() {
           </div>
         </section>
 
+        {/* PART 4: PROJECT GALLERY */}
+        <section className="py-24 border-b border-neutral-800">
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-500 block mb-3">
+                The Projects
+              </span>
+              <h2 className="text-3xl md:text-4xl font-light tracking-tight">Student Work</h2>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-neutral-800 border border-neutral-800">
+            {projects.map(project => (
+              <Link
+                key={project.id}
+                to={`/workshop/${project.id}`}
+                className="group bg-neutral-950 hover:bg-neutral-900 transition-colors overflow-hidden flex flex-col"
+              >
+                <div className="aspect-[4/3] overflow-hidden bg-neutral-900">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-500"
+                  />
+                </div>
+                <div className="p-6 flex flex-col gap-1 flex-1">
+                  <span className="text-[9px] font-semibold tracking-[0.2em] uppercase text-neutral-600">
+                    {String(project.id).padStart(2, "0")}
+                  </span>
+                  <p className="text-sm font-medium text-neutral-200 group-hover:text-white transition-colors">
+                    {project.title}
+                  </p>
+                  <p className="text-xs text-neutral-600">{project.student}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
         {/* MINIMAL FOOTER */}
-        <footer className="py-10 flex justify-center md:justify-start text-[10px] font-semibold tracking-widest uppercase text-neutral-600">
-          <p>© Composing Atmospheres: An experimental architecture workshop</p>
-        </footer>
+        <Footer />
 
       </div>
     </main>
