@@ -1,75 +1,63 @@
 # Vibraspace
 
-Vibraspace is a React app for the **Composing Atmospheres** architecture workshop.
+Vibraspace is a React and Tone.js application for the **Composing Atmospheres**
+architecture workshop. It connects architectural concepts with layered sound:
+visitors can explore workshop material, browse student projects, build sound
+mixes, and record a short audio session based on selected spatial qualities.
 
-The app explains the theory behind the workshop, shows student projects, and lets visitors translate architectural choices into layered sound.
+## Features
 
-## What The App Contains
+- Workshop landing pages for theory, Studio 46, and student projects.
+- A free mixer for combining all available architectural sound tracks.
+- Track controls for playback, volume, stereo pan, and detailed metadata.
+- A guided session form that maps architectural choices to a curated mixer.
+- 45-second session recording with project metadata.
+- Express and SQLite backend for storing sessions and uploaded audio.
 
-- **Home**: introduction and links to the main areas.
-- **Theory**: written framework for the relationship between architecture, perception, and sound.
-- **Workshop**: description of Studio 46 and a gallery of student projects.
-- **Workshop Project**: one project page with image, description, and audio playback.
-- **Mixer**: a free audio matrix where anyone can play and combine architectural sound tracks.
-- **Session Form**: asks for a project name, description, and architectural parameters.
-- **Session Mixer**: creates a curated mixer from the form choices, records 45 seconds, and saves the result.
+## Tech Stack
 
-## Mixer vs Session Mixer
-
-### Mixer
-
-Route: `/mixer`
-
-The regular Mixer is an open playground. It loads all categories from `src/data/columns_data.json` and shows them in a carousel-style grid.
-
-Each track can be:
-
-- played or paused
-- adjusted by volume
-- adjusted by stereo pan
-- opened for more architectural and musical information
-
-This mixer does not save anything. It is mainly for exploration.
-
-### Session Mixer
-
-Route: `/session-mixer`
-
-The Session Mixer is used after the user fills in `/session-form`.
-
-The form sends:
-
-- project name
-- optional project description
-- one selected value for each architectural category
-
-By default, the Session Mixer only shows tracks that match those selections. The user can switch between:
-
-- **Curated**: only the selected architectural tracks
-- **All tracks**: the full mixer data
-
-When the user submits, the app records 45 seconds of the current mix. It sends the project data, track state, and audio file to the backend.
-
-Saved sessions are stored in SQLite, and audio files are stored in `backend/uploads`.
+- React 19
+- React Router
+- Vite
+- Tailwind CSS
+- Tone.js
+- Express
+- SQLite via `better-sqlite3`
 
 ## Project Structure
 
 ```text
-src/
-  components/
-    layout/      shared page layout pieces
-    mixer/       mixer UI pieces such as tracks, sliders, and modals
-    session/     session recording overlay and action bar
-  data/          mixer and workshop data
-  hooks/         reusable audio and recording logic
-  pages/         route-level screens
-  routes.js      shared route and nav definitions
-
-backend/
-  lib/           config, database, uploads, session repository
-  routes/        Express route handlers
-  server.js      app setup and startup
+.
+|-- src/
+|   |-- components/     Shared UI, layout, mixer, and session components
+|   |-- data/           Mixer categories and workshop project data
+|   |-- hooks/          Audio engine and session recording hooks
+|   |-- pages/          Route-level screens
+|   |-- routes.js       Route and navigation definitions
+|   `-- main.jsx        React entry point
+|-- public/
+|   |-- audio/          Sound assets used by the mixer
+|   |-- img/            Interface and category images
+|   `-- projects/       Workshop project images
+|-- backend/
+|   |-- lib/            Backend config, database, uploads, and repositories
+|   |-- routes/         Express API routes
+|   |-- server.js       Backend entry point
+|   `-- sessions.db     Local SQLite database
+`-- vite.config.js
 ```
+
+## Routes
+
+| Route | Purpose |
+| --- | --- |
+| `/` | Home page |
+| `/mixer` | Free mixer with all tracks |
+| `/theory` | Workshop theory |
+| `/workshop` | Studio and project overview |
+| `/workshop/:id` | Individual workshop project |
+| `/session-form` | Guided project/session form |
+| `/session-mixer` | Curated mixer and recording flow |
 
 ## Local Development
 
@@ -86,60 +74,68 @@ cd backend
 npm install
 ```
 
-Run the frontend:
-
-```bash
-npm run dev
-```
-
-Run the backend in another terminal:
+Start the backend:
 
 ```bash
 cd backend
 npm run dev
 ```
 
-Frontend: `http://localhost:5173`
+In a second terminal, start the frontend:
 
-Backend: `http://localhost:3001`
+```bash
+npm run dev
+```
 
-The Vite dev server proxies `/api` to `http://localhost:3001`.
+The app runs at `http://localhost:5173`.
+
+The backend runs at `http://localhost:3001`.
+
+The Vite development server proxies `/api` requests to the backend.
 
 ## Backend API
 
 ### `POST /api/sessions`
 
-Saves a new recorded session.
+Creates a recorded workshop session.
 
-Expected multipart fields:
+Expected multipart form fields:
 
-- `projectName`
-- `projectDescription`
-- `formData`
-- `trackStates`
-- `audio`
+| Field | Description |
+| --- | --- |
+| `projectName` | Required project name |
+| `projectDescription` | Optional project description |
+| `formData` | JSON object containing selected architectural values |
+| `trackStates` | JSON object containing mixer state |
+| `audio` | Optional recorded audio file |
 
 ### `GET /api/sessions`
 
-Lists saved sessions without full track state.
+Returns all saved sessions without full track state.
 
 ### `GET /api/sessions/:id`
 
-Returns one saved session with full track state.
+Returns one saved session with full form data and track state.
 
 ### `GET /api/sessions/:id/audio`
 
-Streams the saved audio file for a session.
+Streams the saved audio file for one session.
 
-## Database
+## Data Storage
 
-SQLite file:
+Session metadata is stored in:
 
 ```text
-sqlite3 backend/sessions.db
+backend/sessions.db
 ```
 
-Useful query:
+Uploaded recordings are stored in:
+
+```text
+backend/uploads/
+```
+
+Useful SQLite query:
 
 ```sql
 SELECT id, project_name, description, audio_file, created_at
@@ -147,15 +143,33 @@ FROM sessions
 ORDER BY created_at DESC;
 ```
 
-## Checks
+## Scripts
+
+Frontend scripts:
 
 ```bash
-npm run lint
+npm run dev
 npm run build
-node --check backend/server.js
+npm run preview
+npm run lint
 ```
 
-## Production Notes
+Backend scripts:
+
+```bash
+cd backend
+npm run dev
+npm start
+```
+
+## Environment Variables
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `PORT` | `3001` | Backend server port |
+| `FRONTEND_URL` | `http://localhost:5173` | Allowed CORS origin |
+
+## Production
 
 Build the frontend:
 
@@ -170,9 +184,112 @@ cd backend
 npm start
 ```
 
-Environment variables:
+When the frontend has been built, the backend serves the generated `dist/`
+directory and falls back to `index.html` for client-side routes.
 
-| Variable | Default | Description |
-|---|---|---|
-| `PORT` | `3001` | Backend port |
-| `FRONTEND_URL` | `http://localhost:5173` | Allowed CORS origin |
+## First-Time Deployment
+
+These steps assume the server already has Node.js, npm, Git, Caddy, and PM2
+installed.
+
+Clone the project:
+
+```bash
+git clone <repo-url>
+cd vibraspace
+```
+
+Install and build the frontend:
+
+```bash
+npm install
+npm run build
+```
+
+Install backend dependencies:
+
+```bash
+cd backend
+npm install
+```
+
+Start the backend with PM2:
+
+```bash
+pm2 start server.js --name vibraspace
+pm2 save
+```
+
+Configure Caddy:
+
+```caddyfile
+composingatmospheres.ro {
+    reverse_proxy localhost:3001
+}
+```
+
+Reload Caddy after updating the Caddyfile:
+
+```bash
+sudo systemctl reload caddy
+```
+
+The site should now be available at:
+
+```text
+https://composingatmospheres.ro
+```
+
+## Update Deployment
+
+Pull the latest code:
+
+```bash
+git pull
+```
+
+Reinstall dependencies if `package.json` or a lockfile changed:
+
+```bash
+npm install
+cd backend
+npm install
+cd ..
+```
+
+Rebuild the frontend:
+
+```bash
+npm run build
+```
+
+Restart the backend process:
+
+```bash
+pm2 restart vibraspace
+pm2 save
+```
+
+Check the running process:
+
+```bash
+pm2 status
+```
+
+If PM2 shows duplicate `vibraspace` processes, delete the extra process by id
+and save the corrected list:
+
+```bash
+pm2 delete <id>
+pm2 save
+```
+
+## Checks
+
+Run these before committing changes:
+
+```bash
+npm run lint
+npm run build
+node --check backend/server.js
+```
