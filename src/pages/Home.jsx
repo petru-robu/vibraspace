@@ -93,37 +93,11 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 02. THE MIXER */}
+        {/* 02. WORKSHOP DETAILS */}
         <section className="py-24 flex flex-col md:flex-row justify-between items-start gap-12 border-b border-neutral-800">
           <div className="max-w-xl">
             <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-500 block mb-6">
-              02 / The Tool
-            </span>
-            <h2 className="text-3xl md:text-5xl font-light tracking-tight leading-tight">
-              Architectural <br />
-              <span className="font-medium">Mixer.</span>
-            </h2>
-          </div>
-          
-          <div className="max-w-sm flex flex-col items-start">
-            <p className="text-sm text-neutral-400 leading-relaxed font-light mb-8 text-justify">
-              A bespoke interactive interface designed to isolate specific building characteristics and manipulate their resulting audio parameters in real-time. Test the theories yourself.
-            </p>
-            {/* Link to Mixer */}
-            <Link
-              to={routes.mixer}
-              className="group flex items-center text-sm font-medium border-b border-neutral-600 pb-1.5 hover:text-neutral-50 hover:border-neutral-50 transition-all text-neutral-400"
-            >
-              Launch the Mixer <ArrowRight />
-            </Link>
-          </div>
-        </section>
-
-        {/* 03. WORKSHOP DETAILS */}
-        <section className="py-24 flex flex-col md:flex-row justify-between items-start gap-12 border-b border-neutral-800">
-          <div className="max-w-xl">
-            <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-500 block mb-6">
-              03 / Studio 46 - Reimagining the Polish Inn
+              02 / Studio 46 - Reimagining the Polish Inn
             </span>
             <h2 className="text-3xl md:text-5xl font-light tracking-tight leading-tight">
               A hands-on study of <br />
@@ -145,8 +119,41 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 04. STUDIO */}
+        {/* 03. THE MIXER */}
         <section className="py-24 flex flex-col md:flex-row justify-between items-start gap-12 border-b border-neutral-800">
+          <div className="max-w-xl">
+            <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-500 block mb-6">
+              03 / The Tool
+            </span>
+            <h2 className="text-3xl md:text-5xl font-light tracking-tight leading-tight">
+              Architectural <br />
+              <span className="font-medium">Mixer.</span>
+            </h2>
+          </div>
+
+          <div className="max-w-sm flex flex-col items-start">
+            <p className="text-sm text-neutral-400 leading-relaxed font-light mb-8 text-justify">
+              This is an interactive mixer where you can play around in real time, test the sonic behavior of architectural parameters, and then move into a studio flow to compose and save an experimental track.
+            </p>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link
+                to={routes.mixer}
+                className="group flex items-center text-sm font-medium border-b border-neutral-600 pb-1.5 hover:text-neutral-50 hover:border-neutral-50 transition-all text-neutral-400"
+              >
+                Launch the Mixer <ArrowRight />
+              </Link>
+              <Link
+                to={routes.sessionForm}
+                className="group flex items-center text-sm font-medium border-b border-neutral-600 pb-1.5 hover:text-neutral-50 hover:border-neutral-50 transition-all text-neutral-400"
+              >
+                Start a Session <ArrowRight />
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* 04. STUDIO */}
+        {/* <section className="py-24 flex flex-col md:flex-row justify-between items-start gap-12 border-b border-neutral-800">
           <div className="max-w-xl">
             <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-neutral-500 block mb-6">
               04 / Studio Session
@@ -161,14 +168,8 @@ export default function Home() {
             <p className="text-sm text-neutral-400 leading-relaxed font-light mb-8 text-justify">
               Define your architectural parameters — form, volume, structure, materiality — and let the system generate a curated sonic environment tailored to your spatial composition. Record and save your session.
             </p>
-            <Link
-              to={routes.sessionForm}
-              className="group flex items-center text-sm font-medium border-b border-neutral-600 pb-1.5 hover:text-neutral-50 hover:border-neutral-50 transition-all text-neutral-400"
-            >
-              Start a Session <ArrowRight />
-            </Link>
           </div>
-        </section>
+        </section> */}
 
         {/* MINIMAL FOOTER */}
         <Footer />
