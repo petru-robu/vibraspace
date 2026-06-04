@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import columnsData from "../data/columns_data.json";
-import Navbar from "../components/Navbar";
 import { routes } from "../routes";
 
 const ArrowLeft = () => (
@@ -32,7 +31,6 @@ export default function SessionForm() {
 
   return (
     <div className="min-h-screen bg-gray-50 text-neutral-900 px-4 md:px-6 pt-16 md:pt-24 pb-16 font-['Poppins',_sans-serif]">
-      <Navbar />
       <div className="max-w-2xl mx-auto">
         <Link
           to={routes.home}

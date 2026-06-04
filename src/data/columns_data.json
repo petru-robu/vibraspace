@@ -177,7 +177,7 @@
         "audio": "/audio/25.wav",
         "arhinfo": "A structural system characterized by substantial mass, thick load-bearing elements, and strong material presence. It is commonly associated with solidity, permanence, monumentality, and spatial gravity.",
         "musinfo": "Heavy filter sweep bass",
-        "img": "/img/25.png"
+        "img": "/img/heavy.png"
       },
       {
         "id": 14,
@@ -186,7 +186,7 @@
         "audio": "/audio/14.wav",
         "arhinfo": "A structural system characterized by substantial mass, thick load-bearing elements, and strong material presence. It is commonly associated with solidity, permanence, monumentality, and spatial gravity.",
         "musinfo": "These dissonant sound effects create an intense, heavy texture full of friction. They project a highly tense, grating vibe meant to invoke discomfort.",
-        "img": "/img/14.png"
+        "img": "/img/heavy.png"
       },
       {
         "id": 16,
@@ -195,7 +195,7 @@
         "audio": "/audio/16.wav",
         "arhinfo": "A structural system characterized by slender elements, reduced mass, and visual permeability. It is commonly associated with efficiency, transparency, precision, and a sense of openness.",
         "musinfo": "The Aeveus Aeternu evolving pad expands into an open, highly restful synthesizer texture. It floats with a weightless, light vibe that gently shifts over time.",
-        "img": "/img/16.png"
+        "img": "/img/light.png"
       },
       {
         "id": 17,
@@ -204,7 +204,7 @@
         "audio": "/audio/17.wav",
         "arhinfo": "A structural system characterized by slender elements, reduced mass, and visual permeability. It is commonly associated with efficiency, transparency, precision, and a sense of openness.",
         "musinfo": "A bright electronic organ provides a very stable, clearly defined tone. It projects a cheerful, light vibe with a crisp and classic resonance.",
-        "img": "/img/17.png"
+        "img": "/img/light.png"
       }
     ]
   },
@@ -220,7 +220,7 @@
         "audio": "/audio/18.wav",
         "arhinfo": "Opaque materiality describes materials that block the transmission of light and emphasize mass, enclosure, and solidity. It is often associated with privacy, permanence, and defined spatial boundaries.",
         "musinfo": "A basic acoustic drum kit produces a dense, opaque percussive sound. It delivers a grounded, solid vibe that firmly anchors the material reality of the track.",
-        "img": "/img/18.png"
+        "img": "/img/opaque.png"
       },
       {
         "id": 19,
@@ -229,7 +229,7 @@
         "audio": "/audio/19.wav",
         "arhinfo": "Translucent materiality describes materials that allow light to pass through diffusely without clear visibility beyond the surface. It is often associated with softness, ambiguity, filtered light, and atmospheric depth.",
         "musinfo": "The air marimba combines a soft bell tone with a spectral, noisy tail. It gives off a translucent, delicate vibe that feels both organic and slightly synthetic.",
-        "img": "/img/19.png"
+        "img": "/img/translucent.png"
       },
       {
         "id": 20,
@@ -238,7 +238,7 @@
         "audio": "/audio/20.wav",
         "arhinfo": "Describes materials that allow direct visual and light transmission, maintaining clarity between interior and exterior spaces. It is often associated with openness, lightness, continuity, and visual connection.",
         "musinfo": "These synthesized glass keys are plucked to create a reverbed, glassy resonance. They offer a highly transparent, fragile vibe that chimes with clear, crystalline purity.",
-        "img": "/img/20.png"
+        "img": "/img/transparent.png"
       }
     ]
   }
