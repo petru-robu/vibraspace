@@ -81,60 +81,68 @@ cd backend
 npm install
 ```
 
-Run the frontend:
-
-```bash
-npm run dev
-```
-
-Run the backend in another terminal:
+Start the backend:
 
 ```bash
 cd backend
 npm run dev
 ```
 
-Frontend: `http://localhost:5173`
+In a second terminal, start the frontend:
 
-Backend: `http://localhost:3001`
+```bash
+npm run dev
+```
 
-The Vite dev server proxies `/api` to `http://localhost:3001`.
+The app runs at `http://localhost:5173`.
+
+The backend runs at `http://localhost:3001`.
+
+The Vite development server proxies `/api` requests to the backend.
 
 ## Backend API
 
 ### `POST /api/sessions`
 
-Saves a new recorded session.
+Creates a recorded workshop session.
 
-Expected multipart fields:
+Expected multipart form fields:
 
-- `projectName`
-- `projectDescription`
-- `formData`
-- `trackStates`
-- `audio`
+| Field | Description |
+| --- | --- |
+| `projectName` | Required project name |
+| `projectDescription` | Optional project description |
+| `formData` | JSON object containing selected architectural values |
+| `trackStates` | JSON object containing mixer state |
+| `audio` | Optional recorded audio file |
 
 ### `GET /api/sessions`
 
-Lists saved sessions without full track state.
+Returns all saved sessions without full track state.
 
 ### `GET /api/sessions/:id`
 
-Returns one saved session with full track state.
+Returns one saved session with full form data and track state.
 
 ### `GET /api/sessions/:id/audio`
 
-Streams the saved audio file for a session.
+Streams the saved audio file for one session.
 
-## Database
+## Data Storage
 
-SQLite file:
+Session metadata is stored in:
 
 ```text
-sqlite3 backend/sessions.db
+backend/sessions.db
 ```
 
-Useful query:
+Uploaded recordings are stored in:
+
+```text
+backend/uploads/
+```
+
+Useful SQLite query:
 
 ```sql
 SELECT id, project_name, description, audio_file, created_at
@@ -142,15 +150,33 @@ FROM sessions
 ORDER BY created_at DESC;
 ```
 
-## Checks
+## Scripts
+
+Frontend scripts:
 
 ```bash
-npm run lint
+npm run dev
 npm run build
-node --check backend/server.js
+npm run preview
+npm run lint
 ```
 
-## Production Notes
+Backend scripts:
+
+```bash
+cd backend
+npm run dev
+npm start
+```
+
+## Environment Variables
+
+| Variable | Default | Description |
+| --- | --- | --- |
+| `PORT` | `3001` | Backend server port |
+| `FRONTEND_URL` | `http://localhost:5173` | Allowed CORS origin |
+
+## Production
 
 Build the frontend:
 
@@ -165,9 +191,112 @@ cd backend
 npm start
 ```
 
-Environment variables:
+When the frontend has been built, the backend serves the generated `dist/`
+directory and falls back to `index.html` for client-side routes.
 
-| Variable | Default | Description |
-|---|---|---|
-| `PORT` | `3001` | Backend port |
-| `FRONTEND_URL` | `http://localhost:5173` | Allowed CORS origin |
+## First-Time Deployment
+
+These steps assume the server already has Node.js, npm, Git, Caddy, and PM2
+installed.
+
+Clone the project:
+
+```bash
+git clone <repo-url>
+cd vibraspace
+```
+
+Install and build the frontend:
+
+```bash
+npm install
+npm run build
+```
+
+Install backend dependencies:
+
+```bash
+cd backend
+npm install
+```
+
+Start the backend with PM2:
+
+```bash
+pm2 start server.js --name vibraspace
+pm2 save
+```
+
+Configure Caddy:
+
+```caddyfile
+composingatmospheres.ro {
+    reverse_proxy localhost:3001
+}
+```
+
+Reload Caddy after updating the Caddyfile:
+
+```bash
+sudo systemctl reload caddy
+```
+
+The site should now be available at:
+
+```text
+https://composingatmospheres.ro
+```
+
+## Update Deployment
+
+Pull the latest code:
+
+```bash
+git pull
+```
+
+Reinstall dependencies if `package.json` or a lockfile changed:
+
+```bash
+npm install
+cd backend
+npm install
+cd ..
+```
+
+Rebuild the frontend:
+
+```bash
+npm run build
+```
+
+Restart the backend process:
+
+```bash
+pm2 restart vibraspace
+pm2 save
+```
+
+Check the running process:
+
+```bash
+pm2 status
+```
+
+If PM2 shows duplicate `vibraspace` processes, delete the extra process by id
+and save the corrected list:
+
+```bash
+pm2 delete <id>
+pm2 save
+```
+
+## Checks
+
+Run these before committing changes:
+
+```bash
+npm run lint
+npm run build
+node --check backend/server.js
+```

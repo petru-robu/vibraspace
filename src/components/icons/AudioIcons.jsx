@@ -11,6 +11,18 @@ export const PauseIcon = ({ className = "w-5 h-5" }) => (
   </svg>
 );
 
+export const LoopIcon = ({ className = "w-5 h-5" }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z" />
+  </svg>
+);
+
+export const StopIcon = ({ className = "w-3.5 h-3.5" }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <rect x="6" y="6" width="12" height="12" rx="1" />
+  </svg>
+);
+
 export const InfoIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
     <circle cx="12" cy="12" r="10" />
@@ -19,10 +31,23 @@ export const InfoIcon = () => (
   </svg>
 );
 
-export const CloseIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+export const CloseIcon = ({ className = "w-5 h-5" }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
     <line x1="18" y1="6" x2="6" y2="18" />
     <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+);
+
+export const MaximizeIcon = ({ className = "w-5 h-5" }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <polyline points="9 3 3 3 3 9" />
+    <line x1="3" y1="3" x2="10" y2="10" />
+    <polyline points="15 3 21 3 21 9" />
+    <line x1="21" y1="3" x2="14" y2="10" />
+    <polyline points="9 21 3 21 3 15" />
+    <line x1="3" y1="21" x2="10" y2="14" />
+    <polyline points="15 21 21 21 21 15" />
+    <line x1="21" y1="21" x2="14" y2="14" />
   </svg>
 );
 

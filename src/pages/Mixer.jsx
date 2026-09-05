@@ -1,13 +1,11 @@
 import React from "react";
 import columnsData from "../data/columns_data.json";
 import MixerGrid, { ArrowLeft } from "../components/MixerGrid";
-import Navbar from "../components/Navbar";
 import { routes } from "../routes";
 
 export default function ArchitecturalMixer() {
   return (
     <main className="min-h-screen bg-gray-50 text-neutral-900 px-4 md:px-6 pt-16 md:pt-24 pb-12 font-['Poppins',_sans-serif]">
-      <Navbar />
       <div className="max-w-7xl mx-auto">
         <MixerGrid
           columns={columnsData}
