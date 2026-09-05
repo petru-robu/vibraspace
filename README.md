@@ -1,23 +1,33 @@
 # Vibraspace
 
-Vibraspace is a React app for the **Composing Atmospheres** architecture workshop.
+Vibraspace is a React app for the **Composing Atmospheres** architecture workshop. The app should be available at [composingatmospheres.ro](https://composingatmospheres.ro/)
 
-The app explains the theory behind the workshop, shows student projects, and lets visitors translate architectural choices into layered sound.
+This project supports a **PhD in Architecture** research thesis, for which I served as the lead developer and programmer who built the full-stack Vibraspace application.
+
+Beyond engineering, I also composed and produced all the original ambient sound tracks available. A short demo of the compositions only is available [here](https://www.youtube.com/watch?v=VkiRsRmau30).
+
+![comp-atmo.png](comp-atmo.png)
 
 ## What The App Contains
 
 - **Home**: introduction and links to the main areas.
+
 - **Theory**: written framework for the relationship between architecture, perception, and sound.
+
 - **Workshop**: description of Studio 46 and a gallery of student projects.
+
 - **Workshop Project**: one project page with image, description, and audio playback.
+
 - **Mixer**: a free audio matrix where anyone can play and combine architectural sound tracks.
-- **Session Form**: asks for a project name, description, and architectural parameters.
+
+- **Session Form**: asks for a project name, 
+description, and architectural parameters.
+
 - **Session Mixer**: creates a curated mixer from the form choices, records 45 seconds, and saves the result.
 
-## Mixer vs Session Mixer
+## Mixer & Session Mixer
 
 ### Mixer
-
 Route: `/mixer`
 
 The regular Mixer is an open playground. It loads all categories from `src/data/columns_data.json` and shows them in a carousel-style grid.
@@ -30,6 +40,8 @@ Each track can be:
 - opened for more architectural and musical information
 
 This mixer does not save anything. It is mainly for exploration.
+
+![arch-matrix.png](arch-matrix.png)
 
 ### Session Mixer
 
@@ -52,24 +64,7 @@ When the user submits, the app records 45 seconds of the current mix. It sends t
 
 Saved sessions are stored in SQLite, and audio files are stored in `backend/uploads`.
 
-## Project Structure
-
-```text
-src/
-  components/
-    layout/      shared page layout pieces
-    mixer/       mixer UI pieces such as tracks, sliders, and modals
-    session/     session recording overlay and action bar
-  data/          mixer and workshop data
-  hooks/         reusable audio and recording logic
-  pages/         route-level screens
-  routes.js      shared route and nav definitions
-
-backend/
-  lib/           config, database, uploads, session repository
-  routes/        Express route handlers
-  server.js      app setup and startup
-```
+![session.png](session.png)
 
 ## Local Development
 
